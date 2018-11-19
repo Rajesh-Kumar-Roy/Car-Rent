@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using CarRentApp.Models;
+using CarRentApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +19,14 @@ namespace CarRentApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<RentRequest, RentRequestViewModel>();
+                cfg.CreateMap<RentRequestViewModel, RentRequest>();
+            });
+
         }
     }
 }
