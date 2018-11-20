@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using CarRentApp.Models;
 using CarRentApp.Context;
 using CarRentApp.ViewModels;
@@ -18,17 +19,19 @@ namespace CarRentApp.Controllers
 
         // GET: /VehicleType/
         public ActionResult Index()
-
-        {
+        {   
+            
             List<VehicleType> vehicle = db.VehicleTypes.ToList();
-            List<VehicleTypeViewModel> vehicleTypeViewModels=new List<VehicleTypeViewModel>();
-            foreach (var vcle in vehicle)
-            {
-               VehicleTypeViewModel vmrTypeViewModel=new VehicleTypeViewModel();
-                vmrTypeViewModel.Id = vcle.Id;
-                vmrTypeViewModel.Name = vcle.Name;
-                vehicleTypeViewModels.Add(vmrTypeViewModel);
-            }
+            List<VehicleTypeViewModel> vehicleTypeViewModels = Mapper.Map<List<VehicleTypeViewModel>>(vehicle);
+           
+
+            //foreach (var vcle in vehicle)
+           // {
+             //   VehicleTypeViewModel vmrTypeViewModel = new VehicleTypeViewModel();
+              //  vmrTypeViewModel.Id = vcle.Id;
+              //  vmrTypeViewModel.Name = vcle.Name;
+               // vehicleTypeViewModels.Add(vmrTypeViewModel);
+           // }
             return View(vehicleTypeViewModels);
         }
 
@@ -45,9 +48,8 @@ namespace CarRentApp.Controllers
                 return HttpNotFound();
             }
 
-            VehicleTypeViewModel vehicleTypeViewModel=new VehicleTypeViewModel();
-            vehicleTypeViewModel.Id = vehicletype.Id;
-            vehicleTypeViewModel.Name = vehicletype.Name;
+            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicletype);
+
             return View(vehicleTypeViewModel);
         }
 
@@ -66,9 +68,8 @@ namespace CarRentApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                VehicleType  vehicleType=new VehicleType();
-                vehicleType.Id = vehicleTypeViewModel.Id;
-                vehicleType.Name = vehicleTypeViewModel.Name;
+                VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
+
                 db.VehicleTypes.Add(vehicleType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -90,9 +91,8 @@ namespace CarRentApp.Controllers
             {
                 return HttpNotFound();
             }
-            VehicleTypeViewModel  vehicleTypeViewModel=new VehicleTypeViewModel();
-            vehicleTypeViewModel.Id = vehicletype.Id;
-            vehicleTypeViewModel.Name = vehicletype.Name;
+            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicletype);
+
             return View(vehicleTypeViewModel);
         }
 
@@ -101,13 +101,11 @@ namespace CarRentApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Name")] VehicleTypeViewModel vehicleTypeViewModel)
+        public ActionResult Edit([Bind(Include = "Id,Name")] VehicleTypeViewModel vehicleTypeViewModel)
         {
             if (ModelState.IsValid)
             {
-                VehicleType vehicleType=new VehicleType();
-                vehicleType.Id = vehicleTypeViewModel.Id;
-                vehicleType.Name = vehicleTypeViewModel.Name;
+                VehicleType vehicleType = Mapper.Map<VehicleType>(vehicleTypeViewModel);
                 db.Entry(vehicleType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -128,9 +126,8 @@ namespace CarRentApp.Controllers
                 return HttpNotFound();
             }
 
-         VehicleTypeViewModel vehicleTypeViewModel=new VehicleTypeViewModel();
-            vehicleTypeViewModel.Id = vehicletype.Id;
-            vehicleTypeViewModel.Name = vehicletype.Name;
+            VehicleTypeViewModel vehicleTypeViewModel = Mapper.Map<VehicleTypeViewModel>(vehicletype);
+
 
 
             return View(vehicleTypeViewModel);
@@ -146,7 +143,7 @@ namespace CarRentApp.Controllers
             {
                 db.VehicleTypes.Remove(vehicletype);
             }
-           
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }

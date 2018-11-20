@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using CarRentApp.Models;
 using CarRentApp.Context;
 using CarRentApp.ViewModels;
@@ -20,17 +22,18 @@ namespace CarRentApp.Controllers
         public ActionResult Index()
         {
             List<Customer> customer = db.Customers.ToList();
-            List<CustomerViewModel> customerViewModels=new List<CustomerViewModel>();
-            foreach (var cmr in customer)
-            {
-                CustomerViewModel cmrViewModel=new CustomerViewModel();
-                cmrViewModel.Id = cmr.Id;
-                cmrViewModel.Name = cmr.Name;
-                cmrViewModel.ContactNo = cmr.ContactNo;
-                cmrViewModel.Email = cmr.Email;
-                cmrViewModel.Address = cmr.Address;
-                customerViewModels.Add(cmrViewModel);
-            }
+            List<CustomerViewModel> customerViewModels = Mapper.Map<List<CustomerViewModel>>(customer);
+          //  foreach (var cmr in customer)
+            //{
+               // CustomerViewModel cmrViewModel = new CustomerViewModel();
+               // cmrViewModel.Id = cmr.Id;
+               // cmrViewModel.Name = cmr.Name;
+
+                //cmrViewModel.Address = cmr.Address;
+                //cmrViewModel.ContactNo = cmr.ContactNo;
+               // cmrViewModel.Email = cmr.Email;
+               // customerViewModels.Add(cmrViewModel);
+           // }
             return View(customerViewModels);
         }
 
@@ -46,12 +49,8 @@ namespace CarRentApp.Controllers
             {
                 return HttpNotFound();
             }
-            CustomerViewModel customerViewModel=new CustomerViewModel();
-            customerViewModel.Id = customer.Id;
-            customerViewModel.Name = customer.Name;
-            customerViewModel.ContactNo = customer.ContactNo;
-            customerViewModel.Email = customer.Email;
-            customerViewModel.Address = customer.Address;
+         
+            CustomerViewModel customerViewModel = Mapper.Map<CustomerViewModel>(customer);
             return View(customerViewModel);
         }
 
@@ -66,16 +65,13 @@ namespace CarRentApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Name,Email,ContactNo,Address")] CustomerViewModel customerViewModel)
+        public ActionResult Create([Bind(Include = "Id,Name,Email,ContactNo,Address")] CustomerViewModel customerViewModel)
         {
             if (ModelState.IsValid)
             {
-                Customer customer=new Customer();
-                customer.Id = customerViewModel.Id;
-                customer.Name = customerViewModel.Name;
-                customer.ContactNo = customerViewModel.ContactNo;
-                customer.Email = customerViewModel.Email;
-                customer.Address = customerViewModel.Address;
+              
+                Customer customer = Mapper.Map<Customer>(customerViewModel);
+
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -98,12 +94,7 @@ namespace CarRentApp.Controllers
                 return HttpNotFound();
 
             }
-            CustomerViewModel customerViewModel = new CustomerViewModel();
-            customerViewModel.Id = customer.Id;
-            customerViewModel.Name = customer.Name;
-            customerViewModel.ContactNo = customer.ContactNo;
-            customerViewModel.Email = customer.Email;
-            customerViewModel.Address = customer.Address;
+            CustomerViewModel customerViewModel = Mapper.Map<CustomerViewModel>(customer);
             return View(customerViewModel);
         }
 
@@ -117,12 +108,7 @@ namespace CarRentApp.Controllers
             if (ModelState.IsValid)
             {
 
-                Customer customer = new Customer();
-                customer.Id = customerViewModel.Id;
-                customer.Name = customerViewModel.Name;
-                customer.ContactNo = customerViewModel.ContactNo;
-                customer.Email = customerViewModel.Email;
-                customer.Address = customerViewModel.Address;
+                Customer customer = Mapper.Map<Customer>(customerViewModel);
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -142,12 +128,7 @@ namespace CarRentApp.Controllers
             {
                 return HttpNotFound();
             }
-            CustomerViewModel customerViewModel = new CustomerViewModel();
-            customerViewModel.Id = customer.Id;
-            customerViewModel.Name = customer.Name;
-            customerViewModel.ContactNo = customer.ContactNo;
-            customerViewModel.Email = customer.Email;
-            customerViewModel.Address = customer.Address;
+            CustomerViewModel customerViewModel = Mapper.Map<CustomerViewModel>(customer);
             return View(customerViewModel);
         }
 
@@ -159,7 +140,8 @@ namespace CarRentApp.Controllers
             Customer customer = db.Customers.Find(id);
             if (customer != null)
             {
-                db.Customers.Remove(customer);
+                db.Customers.Remove(customer); 
+               
             }
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -173,5 +155,7 @@ namespace CarRentApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+ 
     }
 }

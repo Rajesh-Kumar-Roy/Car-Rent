@@ -21,12 +21,19 @@ namespace CarRentApp
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
 
+           
             Mapper.Initialize(cfg =>
             {
+                cfg.CreateMap<Customer, CustomerViewModel>();
+                cfg.CreateMap<CustomerViewModel, Customer>(); 
+
+                cfg.CreateMap<VehicleType, VehicleTypeViewModel>();
+                cfg.CreateMap<VehicleTypeViewModel, VehicleType>();
+
                 cfg.CreateMap<RentRequest, RentRequestViewModel>();
                 cfg.CreateMap<RentRequestViewModel, RentRequest>();
             });
-
+          
         }
     }
 }
