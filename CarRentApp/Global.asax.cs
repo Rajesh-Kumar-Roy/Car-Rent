@@ -32,6 +32,8 @@ namespace CarRentApp
 
                 cfg.CreateMap<RentRequest, RentRequestViewModel>();
                 cfg.CreateMap<RentRequestViewModel, RentRequest>();
+                cfg.CreateMap<Notification, NotificationViewModel>();
+                cfg.CreateMap<NotificationViewModel, Notification>();
             });
           
         }

@@ -62,7 +62,28 @@ namespace CarRentApp.Controllers
             {
                 RentRequest rentRequest = Mapper.Map<RentRequest>(rentRequestViewModel);
                 db.RentRequests.Add(rentRequest);
-                db.SaveChanges();
+                var isSave=db.SaveChanges()>0;
+
+                if (isSave)
+                {
+                    Notification notification=new Notification();
+                    notification.Status = "New";
+                    notification.Details = "Get a new rent request ";
+                    notification.NotificatinDateTime=DateTime.Now;
+                    notification.CustomerId = rentRequest.CustomerId;
+                    notification.RentRequestId = rentRequest.Id;
+                    db.Notifications.Add(notification);
+                    db.SaveChanges();
+
+                    RentRequestHistory rentRequestHistory =new RentRequestHistory();
+                    rentRequestHistory.Status = "New";
+                    rentRequestHistory.Text = "Get a new rent request";
+                    rentRequestHistory.HistoryDateTime=DateTime.Now;
+                    rentRequestHistory.RentRequestId = rentRequest.Id;
+                    db.RentRequestHistorys.Add(rentRequestHistory);
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -145,5 +166,6 @@ namespace CarRentApp.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

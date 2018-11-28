@@ -1,0 +1,179 @@
+﻿@model CarRentApp.ViewModels.NotificationViewModel
+
+@{
+    ViewBag.Title = "Replay";
+}
+
+<h2>Replay</h2>
+<hr/>
+@{
+    var data = ViewBag.Notification;
+    if (data!=null)
+    {
+        <div class="row table-bordered">
+            <br/>
+
+            <div class="col-md-6 ">
+                <h3 class="col-md-offset-1"> Customer Info:</h3><br/>
+                <div class="row">
+
+                    @Html.LabelFor(model => model.Customer.Name, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.Customer.Name</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Customer.ContactNo, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.Customer.ContactNo</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Customer.Email, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.Customer.Email</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Customer.Address, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.Customer.Address</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <h3 class="col-md-offset-1"> Vehicle Rent Info:</h3><br/>
+                <div class="row">
+
+                    @Html.LabelFor(model => model.RentRequest.FromPlace, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.FromPlace</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest.ToPlace, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.ToPlace</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest.StartDateTime, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.StartDateTime</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest.EndDateTime, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.EndDateTime</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest.AirCondition, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.AirCondition</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest.VehicleQty, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.VehicleQty</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest.Description, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.Description</p>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest.VehicleType, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        <p>@data.RentRequest.VehicleType.Name</p>
+                    </div>
+                </div>
+                <br/>
+            </div>
+
+
+</div>
+    
+    }
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true)
+
+        @Html.HiddenFor(model => model.Id)
+        
+        <br/>
+
+        <div class=" row table-bordered">
+            <br/>
+            <div class="row">
+                @Html.LabelFor(model => model.Status, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status)
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Details, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Details)
+                    @Html.ValidationMessageFor(model => model.Details)
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.NotificatinDateTime, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NotificatinDateTime)
+                    @Html.ValidationMessageFor(model => model.NotificatinDateTime)
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.RentRequest, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RentRequest.Id)
+                    @Html.ValidationMessageFor(model => model.RentRequest.Id)
+                </div>
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Customer, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.Id)
+                    @Html.ValidationMessageFor(model => model.CustomerId)
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Replay" class="btn btn-default"/>
+                </div>
+            </div>
+            <br/>
+        </div>
+
+
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
