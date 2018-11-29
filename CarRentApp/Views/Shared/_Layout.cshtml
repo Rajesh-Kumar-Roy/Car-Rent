@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("Car Rent", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -27,6 +27,7 @@
                     <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
                     <li>@Html.ActionLink("Vehicle Type", "Index", "VehicleType")</li>
                     <li>@Html.ActionLink("Rent Request", "Index", "RentRequest")</li>
+                    <li>@Html.ActionLink("Rent Assign List","Index","RentAssign")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -37,7 +38,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Vehicle Rent Application</p>
         </footer>
     </div>
 

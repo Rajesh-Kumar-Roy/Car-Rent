@@ -13,7 +13,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 350px;
 }
 
 /* styles for validation helpers */

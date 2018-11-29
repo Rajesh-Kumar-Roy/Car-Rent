@@ -1,0 +1,66 @@
+﻿@model CarRentApp.Models.RentAssign
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>RentAssign</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RentPrice, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RentPrice,new{htmlAttributes=new{@class="form-control"}})
+                @Html.ValidationMessageFor(model => model.RentPrice,"",new{@class="text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Status,new {htmlAttributes=new{@class="form-control"}})
+                @Html.ValidationMessageFor(model => model.Status,"",new{@class="text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RentAssignDateTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RentAssignDateTime,new{htmlAttributes=new{@class="form-control"}})
+                @Html.ValidationMessageFor(model => model.RentAssignDateTime,"",new{@class="text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RentRequestId, "RentRequestId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("RentRequestId", String.Empty)
+                @Html.ValidationMessageFor(model => model.RentRequestId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

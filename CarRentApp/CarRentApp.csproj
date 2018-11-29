@@ -168,6 +168,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\RentAssignController.cs" />
     <Compile Include="Controllers\RentRequestController.cs" />
     <Compile Include="Controllers\VehicleTypeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -176,6 +177,10 @@
     <Compile Include="Migrations\201811160741385_Car_Rent_Model_Added.cs" />
     <Compile Include="Migrations\201811160741385_Car_Rent_Model_Added.Designer.cs">
       <DependentUpon>201811160741385_Car_Rent_Model_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811291339032_RentAssign_Model_VehicleType_Added.cs" />
+    <Compile Include="Migrations\201811291339032_RentAssign_Model_VehicleType_Added.Designer.cs">
+      <DependentUpon>201811291339032_RentAssign_Model_VehicleType_Added.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -190,6 +195,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModels\NotificationViewModel.cs" />
+    <Compile Include="ViewModels\RentAssignViewModel.cs" />
     <Compile Include="ViewModels\RentRequestViewModel.cs" />
     <Compile Include="ViewModels\VehicleTypeViewModel.cs" />
   </ItemGroup>
@@ -270,6 +276,12 @@
     <Content Include="Views\Notification\Edit.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Notification\Replay.cshtml" />
+    <Content Include="Views\RentAssign\Create.cshtml" />
+    <Content Include="Views\RentAssign\Delete.cshtml" />
+    <Content Include="Views\RentAssign\Details.cshtml" />
+    <Content Include="Views\RentAssign\Edit.cshtml" />
+    <Content Include="Views\RentAssign\Index.cshtml" />
+    <Content Include="Views\RentAssign\Assign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,6 +293,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811160741385_Car_Rent_Model_Added.resx">
       <DependentUpon>201811160741385_Car_Rent_Model_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811291339032_RentAssign_Model_VehicleType_Added.resx">
+      <DependentUpon>201811291339032_RentAssign_Model_VehicleType_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

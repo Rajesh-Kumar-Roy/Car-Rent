@@ -34,7 +34,7 @@ namespace CarRentApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RentRequest rentrequest = db.RentRequests.Find(id);
+            RentRequest rentrequest = db.RentRequests.Include(c=>c.VehicleType).Include(c=>c.Customer).SingleOrDefault(d=>d.Id==id);
             if (rentrequest == null)
             {
                 return HttpNotFound();

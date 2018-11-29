@@ -106,7 +106,7 @@
 <div class="row table-bordered">
     
     <br/>
-    <div class="col-md-4">
+    <div class="col-md-5">
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -123,10 +123,10 @@
                     </div>
                 </div>*@
 
-            <div class="row">
-                @Html.LabelFor(model => model.Details, new {@class = "control-label col-md-5"})
-                <div class="col-md-7">
-                    @Html.EditorFor(model => model.Details, new {@style = "width:600px; height:80px;"})
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Details, new {@class = "control-label col-md-4"})
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.Details, new { style = "width: 850px; height:120px;"})
                     @Html.ValidationMessageFor(model => model.Details)
                 </div>
             </div>
@@ -154,10 +154,9 @@
                         @Html.ValidationMessageFor(model => model.CustomerId)
                     </div>
                 </div>*@
-            <br/>
-            <div class="row">
-                <div class="col-md-offset-5 col-md-10">
-                    <input type="submit" value="Replay" class="btn btn-default"/>
+            <div class="form-group row">
+                <div class="col-md-offset-4 col-md-7">
+                    <input type="submit" value="Replay" class="btn btn-success"/>
                 </div>
             </div>
         }
@@ -165,7 +164,7 @@
         <br/>
 
     </div>
-    <div class="col-md-1"></div>
+
     <div class="col-md-7">
         <div class="row col-md-offset-1">
             <h4 class="">Conversations:</h4>
@@ -179,7 +178,7 @@
                         {
                             <dl>
                                 <dt class="text-primary">@msgDt.Customer.Name</dt>
-                                <dd>@msgDt.Details <span class="col-md-offset-1 text-muted"> @msgDt.NotificatinDateTime.ToString("hh:mm:tt")</span></dd>
+                                <dd style="margin-left: 30px;">@msgDt.Details <span class="col-md-offset-1 text-muted"> @msgDt.NotificatinDateTime.ToString("hh:mm:tt")</span></dd>
                             </dl>
                         }
                     }

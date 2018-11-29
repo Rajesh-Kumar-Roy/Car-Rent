@@ -1,14 +1,14 @@
 ﻿@model CarRentApp.ViewModels.VehicleTypeViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = " Vehicle Type Details";
 }
 
-<h2>Details</h2>
+<h2>Vehicle Type Details</h2>
+<hr/>
 
 <div>
-    <h4>VehicleType</h4>
-	<hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -20,7 +20,7 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class="col-md-offset-1">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new{@class="btn btn-warning"}) &nbsp;
+    @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-info"})
 </p>

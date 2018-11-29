@@ -40,11 +40,11 @@ namespace CarRentApp.Controllers
         }
 
         // GET: /Notification/Replay
-        public ActionResult Replay(int? id)
+        public ActionResult Replay(int? rentRqId)
         {
-            Notification notification = db.Notifications.Include(d=>d.RentRequest).Include(d=>d.RentRequest.VehicleType).Include(d=>d.Customer).FirstOrDefault(c => c.RentRequestId == id);
+            Notification notification = db.Notifications.Include(d => d.RentRequest).Include(d => d.RentRequest.VehicleType).Include(d => d.Customer).FirstOrDefault(c => c.RentRequestId == rentRqId);
             NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
-            List<Notification> notificationMessage = db.Notifications.Include(d=>d.Customer).Where(c => c.RentRequestId == id).ToList();
+            List<Notification> notificationMessage = db.Notifications.Include(d => d.Customer).Where(c => c.RentRequestId == rentRqId).ToList();
             ViewBag.Notification = notificationViewModel;
             ViewBag.Messages = notificationMessage;
             ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");

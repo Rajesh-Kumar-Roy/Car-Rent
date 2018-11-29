@@ -21,6 +21,10 @@ namespace CarRentApp.Models
 
         public DateTime RentAssignDateTime { get; set; }
 
+        [ForeignKey("VehicleType")]
+        public int VehicleTypeId { get; set; }
+        public VehicleType VehicleType { get; set; }   
+
         [ForeignKey("RentRequest")]
         public int RentRequestId { get; set; }
         public RentRequest RentRequest { get; set; }
