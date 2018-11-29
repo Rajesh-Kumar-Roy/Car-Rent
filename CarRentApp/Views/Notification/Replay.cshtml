@@ -102,75 +102,98 @@
     
     }
 }
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<br/>
+<div class="row table-bordered">
     
-    <div class="form-horizontal">
-        
-        @Html.ValidationSummary(true)
+    <br/>
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        @Html.HiddenFor(model => model.Id)
-        
-        <br/>
+            @Html.ValidationSummary(true)
 
-        <div class=" row table-bordered">
-            <br/>
+                @*@Html.HiddenFor(model => model.Id)
+
+                <div class="row">
+                    @Html.LabelFor(model => model.Status, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.Editor("New")
+                        @Html.ValidationMessageFor(model => model.Status)
+                    </div>
+                </div>*@
+
             <div class="row">
-                @Html.LabelFor(model => model.Status, new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Status)
-                    @Html.ValidationMessageFor(model => model.Status)
-                </div>
-            </div>
-
-            <div class="row">
-                @Html.LabelFor(model => model.Details, new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Details)
+                @Html.LabelFor(model => model.Details, new {@class = "control-label col-md-5"})
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.Details, new {@style = "width:600px; height:80px;"})
                     @Html.ValidationMessageFor(model => model.Details)
                 </div>
             </div>
 
-            <div class="row">
-                @Html.LabelFor(model => model.NotificatinDateTime, new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NotificatinDateTime)
-                    @Html.ValidationMessageFor(model => model.NotificatinDateTime)
+                @*<div class="row">
+                    @Html.LabelFor(model => model.NotificatinDateTime, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.Editor(DateTime.Now.ToString())
+                        @Html.ValidationMessageFor(model => model.NotificatinDateTime)
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                @Html.LabelFor(model => model.RentRequest, new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.RentRequest.Id)
-                    @Html.ValidationMessageFor(model => model.RentRequest.Id)
+                <div class="row">
+                    @Html.LabelFor(model => model.RentRequest, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.RentRequest.Id)
+                        @Html.ValidationMessageFor(model => model.RentRequest.Id)
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                @Html.LabelFor(model => model.Customer, new {@class = "control-label col-md-2"})
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Customer.Id)
-                    @Html.ValidationMessageFor(model => model.CustomerId)
-                </div>
-            </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Customer, new {@class = "control-label col-md-4"})
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Customer.Id)
+                        @Html.ValidationMessageFor(model => model.CustomerId)
+                    </div>
+                </div>*@
             <br/>
             <div class="row">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-offset-5 col-md-10">
                     <input type="submit" value="Replay" class="btn btn-default"/>
                 </div>
             </div>
-            <br/>
+        }
+
+        <br/>
+
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+        <div class="row col-md-offset-1">
+            <h4 class="">Conversations:</h4>
+            <div class="text-dark">
+                @{
+                    var msgData = ViewBag.Messages;
+                    if (msgData != null)
+                    {
+
+                        foreach (var msgDt in msgData)
+                        {
+                            <dl>
+                                <dt class="text-primary">@msgDt.Customer.Name</dt>
+                                <dd>@msgDt.Details <span class="col-md-offset-1 text-muted"> @msgDt.NotificatinDateTime.ToString("hh:mm:tt")</span></dd>
+                            </dl>
+                        }
+                    }
+                }
+                </>
+            </div>
+
         </div>
+    </div>
 
-
-        </div>
-}
-
+</div>
+<br/>
 <div>
+    
     @Html.ActionLink("Back to List", "Index")
 </div>
 

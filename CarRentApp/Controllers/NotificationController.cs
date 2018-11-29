@@ -44,7 +44,9 @@ namespace CarRentApp.Controllers
         {
             Notification notification = db.Notifications.Include(d=>d.RentRequest).Include(d=>d.RentRequest.VehicleType).Include(d=>d.Customer).FirstOrDefault(c => c.RentRequestId == id);
             NotificationViewModel notificationViewModel = Mapper.Map<NotificationViewModel>(notification);
+            List<Notification> notificationMessage = db.Notifications.Include(d=>d.Customer).Where(c => c.RentRequestId == id).ToList();
             ViewBag.Notification = notificationViewModel;
+            ViewBag.Messages = notificationMessage;
             ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
             ViewBag.RentRequestId = new SelectList(db.RentRequests, "Id", "FromPlace");
             return View();
@@ -55,18 +57,30 @@ namespace CarRentApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Replay([Bind(Include = "Id,Status,Details,NotificatinDateTime,RentRequestId,CustomerId")] Notification notification)
+        public ActionResult Replay([Bind(Include = "Id,Status,Details,NotificatinDateTime,RentRequestId,CustomerId")] NotificationViewModel notificationViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Notifications.Add(notification);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                Notification notification = db.Notifications.FirstOrDefault(c => c.RentRequestId == notificationViewModel.Id);
+                if (notification!=null)
+                {
+                    Notification notificationObj = new Notification();
+                    notificationObj.Status = "New";
+                    notificationObj.Details = notificationViewModel.Details;
+                    notificationObj.NotificatinDateTime = DateTime.Now;
+                    notificationObj.CustomerId = notification.CustomerId;
+                    notificationObj.RentRequestId = notification.RentRequestId;
+                    db.Notifications.Add(notificationObj);
+                    db.SaveChanges();
+                    return RedirectToAction("Replay",new {@id=notification.RentRequestId});
+                }
+                
+                
             }
 
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name", notification.CustomerId);
-            ViewBag.RentRequestId = new SelectList(db.RentRequests, "Id", "FromPlace", notification.RentRequestId);
-            return View(notification);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name", notificationViewModel.CustomerId);
+            ViewBag.RentRequestId = new SelectList(db.RentRequests, "Id", "FromPlace", notificationViewModel.RentRequestId);
+            return View(notificationViewModel);
         }
         // GET: /Notification/Create
         public ActionResult Create()
