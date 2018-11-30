@@ -21,6 +21,9 @@ namespace CarRentApp.Models
         public string ContactNo { get; set; }
 
         [Required,StringLength(500)]
-        public string Address { get; set; } 
+        public string Address { get; set; }
+
+        public string UserId { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

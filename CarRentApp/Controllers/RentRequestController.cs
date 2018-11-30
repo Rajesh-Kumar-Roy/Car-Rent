@@ -20,9 +20,8 @@ namespace CarRentApp.Controllers
         // GET: /RentRequest/
         public ActionResult Index()
         {
-            var rentrequests = db.RentRequests.Include(r => r.Customer).Include(r => r.VehicleType);
-           List< RentRequestViewModel> rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
-
+            var rentrequests = db.RentRequests.Include(r => r.Customer).Include(r => r.VehicleType).Where(c=>c.IsDelete==false).ToList();
+            List< RentRequestViewModel> rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
 
             return View(rentrequestViewModel);
         }
@@ -137,7 +136,7 @@ namespace CarRentApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RentRequest rentrequest = db.RentRequests.Find(id);
+            RentRequest rentrequest = db.RentRequests.Include(c => c.VehicleType).Include(c => c.Customer).SingleOrDefault(d => d.Id == id);
             if (rentrequest == null)
             {
                 return HttpNotFound();
@@ -153,7 +152,11 @@ namespace CarRentApp.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             RentRequest rentrequest = db.RentRequests.Find(id);
-            db.RentRequests.Remove(rentrequest);
+            if (rentrequest!=null)
+            {
+                rentrequest.IsDelete = true;
+                db.Entry(rentrequest).State=EntityState.Modified;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

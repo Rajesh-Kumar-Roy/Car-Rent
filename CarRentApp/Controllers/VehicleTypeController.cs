@@ -21,7 +21,7 @@ namespace CarRentApp.Controllers
         public ActionResult Index()
         {   
             
-            List<VehicleType> vehicle = db.VehicleTypes.ToList();
+            List<VehicleType> vehicle = db.VehicleTypes.Where(c=>c.IsDelete==false).ToList();
             List<VehicleTypeViewModel> vehicleTypeViewModels = Mapper.Map<List<VehicleTypeViewModel>>(vehicle);
            
 
@@ -141,7 +141,8 @@ namespace CarRentApp.Controllers
             VehicleType vehicletype = db.VehicleTypes.Find(id);
             if (vehicletype != null)
             {
-                db.VehicleTypes.Remove(vehicletype);
+                vehicletype.IsDelete = true;
+                db.Entry(vehicletype).State = EntityState.Modified;
             }
 
             db.SaveChanges();

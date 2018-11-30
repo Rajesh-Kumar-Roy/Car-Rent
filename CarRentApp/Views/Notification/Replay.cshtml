@@ -127,7 +127,7 @@
                 @Html.LabelFor(model => model.Details, new {@class = "control-label col-md-4"})
                 <div class="col-md-8">
                     @Html.TextAreaFor(model => model.Details, new { style = "width: 850px; height:120px;"})
-                    @Html.ValidationMessageFor(model => model.Details)
+                    @Html.ValidationMessageFor(model => model.Details,null,new{@class="text-danger"})
                 </div>
             </div>
 

@@ -34,6 +34,7 @@ namespace CarRentApp.Models
         [ForeignKey("VehicleType")]
         public int VehicleTypeId { get; set; }
         public VehicleType VehicleType { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

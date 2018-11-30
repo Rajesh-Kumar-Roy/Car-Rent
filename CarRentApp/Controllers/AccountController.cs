@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CarRentApp.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -25,6 +26,7 @@ namespace CarRentApp.Controllers
             UserManager = userManager;
         }
 
+        public RentDbContext db { get; set; }
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
         //
@@ -78,10 +80,22 @@ namespace CarRentApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 var user = new ApplicationUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    db=new RentDbContext();
+                    Customer customer=new Customer();
+                    customer.Name = model.CustomerViewModel.Name;
+                    customer.Email = model.CustomerViewModel.Email;
+                    customer.ContactNo = model.CustomerViewModel.ContactNo;
+                    customer.Address = model.CustomerViewModel.Address;
+                    customer.UserId = user.Id;
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

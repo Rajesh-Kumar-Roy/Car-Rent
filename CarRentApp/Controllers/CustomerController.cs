@@ -21,8 +21,9 @@ namespace CarRentApp.Controllers
         // GET: /Customer/
         public ActionResult Index()
         {
-            List<Customer> customer = db.Customers.ToList();
+            List<Customer> customer = db.Customers.Where(c=>c.IsDelete==false).ToList();
             List<CustomerViewModel> customerViewModels = Mapper.Map<List<CustomerViewModel>>(customer);
+
           //  foreach (var cmr in customer)
             //{
                // CustomerViewModel cmrViewModel = new CustomerViewModel();
@@ -34,6 +35,7 @@ namespace CarRentApp.Controllers
                // cmrViewModel.Email = cmr.Email;
                // customerViewModels.Add(cmrViewModel);
            // }
+
             return View(customerViewModels);
         }
 
@@ -140,9 +142,11 @@ namespace CarRentApp.Controllers
             Customer customer = db.Customers.Find(id);
             if (customer != null)
             {
-                db.Customers.Remove(customer); 
+                customer.IsDelete = true;
+                db.Entry(customer).State = EntityState.Modified; 
                
             }
+            
             db.SaveChanges();
             return RedirectToAction("Index");
         }

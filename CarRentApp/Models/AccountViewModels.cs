@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using CarRentApp.ViewModels;
 
 namespace CarRentApp.Models
 {
@@ -59,5 +60,7 @@ namespace CarRentApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public CustomerViewModel CustomerViewModel { get; set; }
     }
 }

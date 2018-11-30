@@ -28,5 +28,7 @@ namespace CarRentApp.Models
         [ForeignKey("RentRequest")]
         public int RentRequestId { get; set; }
         public RentRequest RentRequest { get; set; }
+
+        public string Comment { get; set; }
     }
 }
