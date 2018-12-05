@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -21,8 +22,8 @@ namespace CarRentApp.Controllers
         // GET: /Customer/
         public ActionResult Index()
         {
-            List<Customer> customer = db.Customers.Where(c=>c.IsDelete==false).ToList();
-            List<CustomerViewModel> customerViewModels = Mapper.Map<List<CustomerViewModel>>(customer);
+        List<Customer> customer = db.Customers.Where(c=>c.IsDelete==false).ToList();
+          List<CustomerViewModel> customerViewModels = Mapper.Map<List<CustomerViewModel>>(customer);
 
           //  foreach (var cmr in customer)
             //{
@@ -36,7 +37,13 @@ namespace CarRentApp.Controllers
                // customerViewModels.Add(cmrViewModel);
            // }
 
-            return View(customerViewModels);
+         return View(customerViewModels);
+
+            //using (RentDbContext db = new RentDbContext())
+            //{
+            //    var emptyList = db.Customers.ToList<Customer>();
+            //    return Json(new { data = emptyList }, JsonRequestBehavior.AllowGet);
+            //}
         }
 
         // GET: /Customer/Details/5
@@ -160,6 +167,8 @@ namespace CarRentApp.Controllers
             base.Dispose(disposing);
         }
 
- 
+
+
+       
     }
 }
