@@ -136,11 +136,11 @@
 
     </div>
 
-    <div class="col-md-7" style=" height: 220px; overflow-y: scroll; ">
-        <div class="row col-md-offset-2">
-            <h4 class="">Conversations:</h4>
-            <div class="text-dark">
-                <table class="table-hover">
+    <div class="col-md-7">
+        <h4 class=" col-md-offset-2">Conversations :</h4>
+        <div class="row col-md-offset-2" >
+            <div class="text-dark" style="height: 250px; overflow-y: scroll;">
+                <table class="table-hover" style="width: 100%">
                     @{
                         var msgData = ViewBag.NotificationList;
                         if (msgData != null)
@@ -161,9 +161,8 @@
                         }
                     }
                 </table>
-
-</div>
-
+            </div>
+           
         </div>
     </div>
 

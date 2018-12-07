@@ -25,9 +25,37 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
-                    <li>@Html.ActionLink("Vehicle Type", "Index", "VehicleType")</li>
-                    <li>@Html.ActionLink("Rent Request", "Index", "RentRequest")</li>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Customer
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Create", "Create", "Customer")</li>
+                            <li>@Html.ActionLink("Customer List", "Index", "Customer")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Vehicle Type
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Create", "Create", "VehicleType")</li>
+                            <li>@Html.ActionLink("Vehicle Type List", "Index", "VehicleType")</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Rent Request
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Create", "Create", "RentRequest")</li>
+                            <li>@Html.ActionLink("Rent Request List", "Index", "RentRequest")</li>
+                        </ul>
+                    </li>
                     <li>@Html.ActionLink("Rent Assign List","Index","RentAssign")</li>
 
                 </ul>

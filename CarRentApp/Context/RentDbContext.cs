@@ -4,10 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using CarRentApp.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CarRentApp.Context
 {
-    public class RentDbContext : DbContext
+    public class RentDbContext : IdentityDbContext
     {
         public RentDbContext() :base("DefaultConnection")
         {
