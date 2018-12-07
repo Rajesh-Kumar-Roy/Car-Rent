@@ -12,9 +12,11 @@ using AutoMapper;
 using CarRentApp.Models;
 using CarRentApp.Context;
 using CarRentApp.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace CarRentApp.Controllers
 {
+    [Authorize(Roles = "Controller,AppAdmin")]
     public class CustomerController : Controller
     {
         private RentDbContext db = new RentDbContext();
@@ -77,8 +79,7 @@ namespace CarRentApp.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,Email,ContactNo,Address")] CustomerViewModel customerViewModel)
         {
             if (ModelState.IsValid)
-            {
-              
+            {          
                 Customer customer = Mapper.Map<Customer>(customerViewModel);
 
                 db.Customers.Add(customer);

@@ -13,6 +13,7 @@ using CarRentApp.ViewModels;
 
 namespace CarRentApp.Controllers
 {
+    [Authorize(Roles = "Controller,AppAdmin")]
     public class RentAssignController : Controller
     {
         private RentDbContext db = new RentDbContext();

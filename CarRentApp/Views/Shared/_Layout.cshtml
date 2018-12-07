@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    @RenderSection("Styles", false)
 
 </head>
 <body>
@@ -25,17 +26,35 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>
+
+                    @if (User.IsInRole("Customer") || User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
+                    {
+                        <li>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Customer
+                            Rent Request
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Create", "Create", "Customer")</li>
-                            <li>@Html.ActionLink("Customer List", "Index", "Customer")</li>
+                            <li>@Html.ActionLink("Create", "Create", "RentRequest")</li>
+                            <li>@Html.ActionLink("Rent Request List", "Index", "RentRequest")</li>
                         </ul>
                     </li>
-                    <li>
+                    }
+                    
+                    @if (User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
+                        {
+
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Customer
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Create", "Create", "Customer")</li>
+                                <li>@Html.ActionLink("Customer List", "Index", "Customer")</li>
+                            </ul>
+                        </li>
+                        <li>
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Vehicle Type
                             <span class="caret"></span>
@@ -46,17 +65,10 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Rent Request
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Create", "Create", "RentRequest")</li>
-                            <li>@Html.ActionLink("Rent Request List", "Index", "RentRequest")</li>
-                        </ul>
-                    </li>
+                    
                     <li>@Html.ActionLink("Rent Assign List","Index","RentAssign")</li>
+                        }
+                    
 
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -74,8 +86,9 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
+
+    <script src="~/Scripts/jquery-2.1.3.min.js"></script>
    
-    @RenderSection("Styles", false)
     @RenderSection("scripts", required: false)
 </body>
 </html>

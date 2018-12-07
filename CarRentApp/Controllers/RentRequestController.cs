@@ -10,9 +10,11 @@ using CarRentApp.Models;
 using CarRentApp.Context;
 using CarRentApp.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 
 namespace CarRentApp.Controllers
 {
+    [Authorize(Roles = "Controller,AppAdmin,Customer")]
     public class RentRequestController : Controller
     {
         private RentDbContext db = new RentDbContext();
@@ -45,7 +47,7 @@ namespace CarRentApp.Controllers
         // GET: /RentRequest/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
+            //ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Name");
             return View();
         }
@@ -59,7 +61,15 @@ namespace CarRentApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var loginCustomerId = User.Identity.GetUserId();
+                var customer = db.Customers.FirstOrDefault(c => c.UserId == loginCustomerId);
+                
+                if (customer == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
                 RentRequest rentRequest = Mapper.Map<RentRequest>(rentRequestViewModel);
+                rentRequest.CustomerId = customer.Id;
                 db.RentRequests.Add(rentRequest);
                 var isSave=db.SaveChanges()>0;
 

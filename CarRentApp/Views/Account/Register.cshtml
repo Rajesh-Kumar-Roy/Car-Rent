@@ -45,6 +45,27 @@
         </div>
     </div>
     <div class="col-md-6">
+        @if (User.IsInRole("AppAdmin"))
+        {
+           <div class="form-group">
+            @Html.Label("Select Role", new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <div class="row">
+                    <div class=" col-md-6">
+
+                        <span style="display: inline-block">Controller  @Html.RadioButtonFor(model => model.ControllerRole, true, new {@class = "form-control", @id = "ControllerRole"})</span>
+
+                    </div>
+                    <div class=" col-md-6">
+
+                        <span style="display: inline-block">Customer  @Html.RadioButtonFor(model => model.CustomerRole, true, new {@class = "form-control", @id = "CustomerRole", @checked = "checked"})</span> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div> 
+        }
+        
         <div class="form-group">
             @Html.LabelFor(m => m.UserName, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
@@ -77,5 +98,28 @@
 }
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            $("#CustomerRole").prop("checked", true);
+            $("#ControllerRole").prop("checked", false);
+
+            $("#ControllerRole").click(function () {
+
+                $("#ControllerRole").prop("checked", true);
+                $("#CustomerRole").prop("checked", false);
+            });
+
+            $("#CustomerRole").click(function () {
+
+                $("#CustomerRole").prop("checked", true);
+                $("#ControllerRole").prop("checked", false);
+
+            });
+
+        });
+    </script>
 }

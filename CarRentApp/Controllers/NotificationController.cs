@@ -10,9 +10,11 @@ using AutoMapper;
 using CarRentApp.Models;
 using CarRentApp.Context;
 using CarRentApp.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace CarRentApp.Controllers
 {
+    [Authorize]
     public class NotificationController : Controller
     {
         private RentDbContext db = new RentDbContext();
@@ -65,11 +67,18 @@ namespace CarRentApp.Controllers
                 //if (notification != null)
                 //{
                 //}
+                var loginCustomerId = User.Identity.GetUserId();
+                var customer = db.Customers.FirstOrDefault(c => c.UserId == loginCustomerId);
+
+                if (customer == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
                 Notification notificationObj = new Notification();
                     notificationObj.Status = "New";
                     notificationObj.Details = notificationViewModel.ReplayText;
                     notificationObj.NotificatinDateTime = DateTime.Now;
-                    notificationObj.CustomerId = notificationViewModel.CustomerId;
+                    notificationObj.CustomerId = customer.Id;
                     notificationObj.RentRequestId = notificationViewModel.RentRequestId;
                     db.Notifications.Add(notificationObj);
                     db.SaveChanges();

@@ -24,25 +24,33 @@ namespace CarRentApp.Migrations
             //  to avoid creating duplicate seed data.
 
 
-            ////Step 1 Create the user.
-            //var passwordHasher = new PasswordHasher();
-            //var user = new IdentityUser("Administrator");
-            //user.PasswordHash = passwordHasher.HashPassword("Admin123456");
-            ////user.SecurityStamp = Guid.NewGuid().ToString();
+            //Step 1 Create the user.
+            if (!context.Users.Any(r => r.UserName == "Administrator") && !context.Roles.Any(u => u.Name == "AppAdmin"))
+            {
+                var passwordHasher = new PasswordHasher();
+                var user = new IdentityUser("Administrator");
+                user.PasswordHash = passwordHasher.HashPassword("Admin123456");
+                user.SecurityStamp = Guid.NewGuid().ToString();
 
-            ////Step 2 Create and add the new Role.
-            //var roleToChoose = new IdentityRole("Admin");
-            //context.Roles.Add(roleToChoose);
+                //Step 2 Create and add the new Role.
+                var roleAppAdmin = new IdentityRole("AppAdmin");
+                context.Roles.Add(roleAppAdmin);
 
-            ////Step 3 Create a role for a user
-            //var role = new IdentityUserRole();
-            //role.RoleId = roleToChoose.Id;
-            //role.UserId = user.Id;
+                var roleController = new IdentityRole("Controller");
+                context.Roles.Add(roleController);
 
-            ////Step 4 Add the role row and add the user to DB)
-            //user.Roles.Add(role);
-            //context.Users.Add(user);
-            
+                var roleCustomer = new IdentityRole("Customer");
+                context.Roles.Add(roleCustomer);
+
+                //Step 3 Create a role for a user
+                var role = new IdentityUserRole();
+                role.RoleId = roleAppAdmin.Id;
+                role.UserId = user.Id;
+
+                //Step 4 Add the role row and add the user to DB)
+                user.Roles.Add(role);
+                context.Users.Add(user);
+            }
         }
     }
 }

@@ -10,10 +10,12 @@ namespace CarRentApp.Context
 {
     public class RentDbContext : IdentityDbContext
     {
-        public RentDbContext() :base("DefaultConnection")
+        public RentDbContext()
+            : base("DefaultConnection")
         {
             //
         }
+        
         public DbSet<Customer> Customers { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<RentRequest> RentRequests { get; set; }

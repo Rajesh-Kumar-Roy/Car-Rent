@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using CarRentApp.ViewModels;
 
 namespace CarRentApp.Models
@@ -61,6 +62,15 @@ namespace CarRentApp.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [NotMapped]
+        [Display(Name = "Customer Role")]
+        public bool? CustomerRole { get; set; }
+        [NotMapped]
+
+        [Display(Name = "Controller Role")]
+        public bool? ControllerRole { get; set; }
+
+        [NotMapped]
         public CustomerViewModel CustomerViewModel { get; set; }
     }
 }

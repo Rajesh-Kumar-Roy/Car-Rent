@@ -67,7 +67,7 @@ namespace CarRentApp.Controllers
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
-        {
+        {                  
             return View();
         }
 
@@ -82,6 +82,31 @@ namespace CarRentApp.Controllers
             {
                 
                 var user = new ApplicationUser() { UserName = model.UserName };
+
+                var role = new IdentityUserRole();
+                role.UserId = user.Id;
+                RentDbContext db = new RentDbContext();
+               
+                if (model.ControllerRole==true)
+                {
+                    var roleid = db.Roles.FirstOrDefault(c => c.Name == "Controller");
+                    if (roleid != null)
+                    {
+                        role.RoleId = roleid.Id;
+                    }
+                }
+                else 
+                {
+                    var roleid = db.Roles.FirstOrDefault(c => c.Name == "Customer");
+                    if (roleid != null)
+                    {
+                        role.RoleId = roleid.Id;
+                    }
+                }
+
+                user.Roles.Add(role);
+
+
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
