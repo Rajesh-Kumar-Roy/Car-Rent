@@ -13,9 +13,11 @@ namespace CarRentApp.ViewModels
         public int Id { get; set; }
         public string Status { get; set; }
 
+        [NotMapped]
         [Display(Name = "Replay Message")]
         [DataType(DataType.MultilineText)]
         [Required]
+        public string ReplayText { get; set; }
         public string Details { get; set; }
         public DateTime NotificatinDateTime { get; set; }
 

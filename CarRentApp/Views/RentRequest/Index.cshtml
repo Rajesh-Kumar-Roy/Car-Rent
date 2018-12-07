@@ -17,92 +17,95 @@
 <br/>
 
 <p>
-    @Html.ActionLink("Create Request", "Create", null, new {@class="btn btn-info"})
+    @Html.ActionLink("Create Request", "Create", null, new {@class = "btn btn-info"})
 </p>
+
 <table id="example" class="table table-bordered table-hover">
     <thead>
-        <tr>
-            <th>
-                SL
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleTypeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FromPlace)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToPlace)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AirCondition)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleQty)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                Action
-            </th>
-        </tr>
+    <tr>
+        <th>
+            SL
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleTypeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromPlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToPlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AirCondition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
     </thead>
-    @{
-        var sl = 0;
-    }
-    @foreach (var item in Model)
-    {
-        sl++;
-        <tr>
-            <td>
-                @sl
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FromPlace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ToPlace)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AirCondition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleQty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "RentRequest", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" }) &nbsp;
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) &nbsp;
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" }) &nbsp;
-                @Html.ActionLink("Replay", "Replay", "Notification", new { rentRqId = item.Id }, new { @class = "btn btn-info btn-sm" }) &nbsp;
-                @Html.ActionLink("Assign", "Assign", "RentAssign", new { rentRqId = item.Id }, new { @class = "btn btn-success btn-sm" })
-            </td>
-        </tr>
-    }
+    <tbody>
+        @{
+            var sl = 0;
+        }
+        @foreach (var item in Model)
+        {
+            sl++;
+            <tr>
+                <td>
+                    @sl
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirCondition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "RentRequest", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" }) &nbsp;
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) &nbsp;
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" }) &nbsp;
+                    @Html.ActionLink("Replay", "Replay", "Notification", new { rentRqId = item.Id }, new { @class = "btn btn-info btn-sm" }) &nbsp;
+                    @Html.ActionLink("Assign", "Assign", "RentAssign", new { rentRqId = item.Id }, new { @class = "btn btn-success btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
     <thead>
         <tr>
             <th>

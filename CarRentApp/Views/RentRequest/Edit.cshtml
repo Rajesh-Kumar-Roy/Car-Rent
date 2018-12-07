@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FromPlace, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FromPlace, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.FromPlace,new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.FromPlace, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ToPlace, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ToPlace, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.ToPlace,new { @class = "form-control"  })
                 @Html.ValidationMessageFor(model => model.ToPlace,"", new {@class = "text-danger"})
             </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDateTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.StartDateTime, new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDateTime, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new {@class = "form-control" } })
+                @Html.TextBoxFor(model => model.EndDateTime, new {@class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -67,7 +67,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AirCondition, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AirCondition, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.AirCondition, new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.AirCondition, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.VehicleQty, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VehicleQty,new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.VehicleQty,new { @class = "form-control"  })
                 @Html.ValidationMessageFor(model => model.VehicleQty, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Description, new{ @class = "form-control"  })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>

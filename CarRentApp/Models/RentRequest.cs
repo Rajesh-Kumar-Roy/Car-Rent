@@ -36,5 +36,10 @@ namespace CarRentApp.Models
         public VehicleType VehicleType { get; set; }
         public bool IsDelete { get; set; }
 
+        public List<RentAssign> RentAssigns { get; set; }
+        public List<Notification> Notifications { get; set; }
+        public List<RentRequestHistory> RentRequestHistories { get; set; }
+
+
     }
 }

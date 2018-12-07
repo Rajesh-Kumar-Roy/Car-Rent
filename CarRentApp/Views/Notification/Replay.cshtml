@@ -7,11 +7,10 @@
 <h2>Replay</h2>
 <hr/>
 @{
-    var data = ViewBag.Notification;
-    if (data!=null)
+    //var data = ViewBag.Notification;
+    if (Model.Customer!=null)
     {
         <div class="row table-bordered">
-            <br/>
 
             <div class="col-md-6 ">
                 <h3 class="col-md-offset-1"> Customer Info:</h3><br/>
@@ -19,25 +18,25 @@
 
                     @Html.LabelFor(model => model.Customer.Name, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.Customer.Name</p>
+                        <p>@Model.Customer.Name</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.Customer.ContactNo, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.Customer.ContactNo</p>
+                        <p>@Model.Customer.ContactNo</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.Customer.Email, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.Customer.Email</p>
+                        <p>@Model.Customer.Email</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.Customer.Address, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.Customer.Address</p>
+                        <p>@Model.Customer.Address</p>
                     </div>
                 </div>
 
@@ -49,49 +48,49 @@
 
                     @Html.LabelFor(model => model.RentRequest.FromPlace, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.FromPlace</p>
+                        <p>@Model.RentRequest.FromPlace</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.RentRequest.ToPlace, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.ToPlace</p>
+                        <p>@Model.RentRequest.ToPlace</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.RentRequest.StartDateTime, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.StartDateTime</p>
+                        <p>@Model.RentRequest.StartDateTime</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.RentRequest.EndDateTime, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.EndDateTime</p>
+                        <p>@Model.RentRequest.EndDateTime</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.RentRequest.AirCondition, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.AirCondition</p>
+                        <p>@Model.RentRequest.AirCondition</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.RentRequest.VehicleQty, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.VehicleQty</p>
+                        <p>@Model.RentRequest.VehicleQty</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.RentRequest.Description, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.Description</p>
+                        <p>@Model.RentRequest.Description</p>
                     </div>
                 </div>
                 <div class="row">
                     @Html.LabelFor(model => model.RentRequest.VehicleType, new {@class = "control-label col-md-4"})
                     <div class="col-md-8">
-                        <p>@data.RentRequest.VehicleType.Name</p>
+                        <p>@Model.RentRequest.VehicleType.Name</p>
                     </div>
                 </div>
                 <br/>
@@ -104,56 +103,28 @@
 }
 <br/>
 <div class="row table-bordered">
-    
-    <br/>
+
     <div class="col-md-5">
+        <br/>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.RentRequestId)
+            @Html.HiddenFor(model => model.CustomerId)
 
-                @*@Html.HiddenFor(model => model.Id)
 
-                <div class="row">
-                    @Html.LabelFor(model => model.Status, new {@class = "control-label col-md-4"})
-                    <div class="col-md-8">
-                        @Html.Editor("New")
-                        @Html.ValidationMessageFor(model => model.Status)
-                    </div>
-                </div>*@
 
             <div class="form-group row">
-                @Html.LabelFor(model => model.Details, new {@class = "control-label col-md-4"})
+                @Html.LabelFor(model => model.ReplayText, new {@class = "control-label col-md-4"})
                 <div class="col-md-8">
-                    @Html.TextAreaFor(model => model.Details, new { style = "width: 850px; height:120px;"})
-                    @Html.ValidationMessageFor(model => model.Details,null,new{@class="text-danger"})
+                    @Html.TextAreaFor(model => model.ReplayText, new {@class = "form-control", @style = "width: 850px; height:120px;"})
+                    @Html.ValidationMessageFor(model => model.Details, null, new {@class = "text-danger"})
                 </div>
             </div>
 
-                @*<div class="row">
-                    @Html.LabelFor(model => model.NotificatinDateTime, new {@class = "control-label col-md-4"})
-                    <div class="col-md-8">
-                        @Html.Editor(DateTime.Now.ToString())
-                        @Html.ValidationMessageFor(model => model.NotificatinDateTime)
-                    </div>
-                </div>
-
-                <div class="row">
-                    @Html.LabelFor(model => model.RentRequest, new {@class = "control-label col-md-4"})
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.RentRequest.Id)
-                        @Html.ValidationMessageFor(model => model.RentRequest.Id)
-                    </div>
-                </div>
-
-                <div class="row">
-                    @Html.LabelFor(model => model.Customer, new {@class = "control-label col-md-4"})
-                    <div class="col-md-8">
-                        @Html.EditorFor(model => model.Customer.Id)
-                        @Html.ValidationMessageFor(model => model.CustomerId)
-                    </div>
-                </div>*@
             <div class="form-group row">
                 <div class="col-md-offset-4 col-md-7">
                     <input type="submit" value="Replay" class="btn btn-success"/>
@@ -165,26 +136,33 @@
 
     </div>
 
-    <div class="col-md-7">
-        <div class="row col-md-offset-1">
+    <div class="col-md-7" style=" height: 220px; overflow-y: scroll; ">
+        <div class="row col-md-offset-2">
             <h4 class="">Conversations:</h4>
             <div class="text-dark">
-                @{
-                    var msgData = ViewBag.Messages;
-                    if (msgData != null)
-                    {
-
-                        foreach (var msgDt in msgData)
+                <table class="table-hover">
+                    @{
+                        var msgData = ViewBag.NotificationList;
+                        if (msgData != null)
                         {
-                            <dl>
-                                <dt class="text-primary">@msgDt.Customer.Name</dt>
-                                <dd style="margin-left: 30px;">@msgDt.Details <span class="col-md-offset-1 text-muted"> @msgDt.NotificatinDateTime.ToString("hh:mm:tt")</span></dd>
-                            </dl>
+                            foreach (var msgDt in msgData)
+                            {
+                                <tr>
+                                    <td>
+                                        <dl>
+                                            <dt class="text-primary">@msgDt.Customer.Name <span class="col-md-offset-1 text-muted"> @msgDt.NotificatinDateTime.ToString("hh:mm:tt")</span></dt>
+                                            <dd style="margin-left: 30px;">@msgDt.Details</dd>
+                                        </dl>
+                                    <td>
+
+                                </tr>
+                            }
+
                         }
                     }
-                }
-                </>
-            </div>
+                </table>
+
+</div>
 
         </div>
     </div>

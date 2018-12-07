@@ -27,5 +27,8 @@ namespace CarRentApp.Models
 
         public string UserId { get; set; }
         public bool IsDelete { get; set; }
+
+        public List<RentRequest> RentRequests { get; set; }
+        public List<Notification> Notifications { get; set; }
     }
 }
