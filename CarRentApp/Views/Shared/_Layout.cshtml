@@ -50,7 +50,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Create", "Create", "Customer")</li>
+                                @*<li>@Html.ActionLink("Create", "Create", "Customer")</li>*@
                                 <li>@Html.ActionLink("Customer List", "Index", "Customer")</li>
                             </ul>
                         </li>
@@ -75,14 +75,15 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Vehicle Rent Application</p>
-        </footer>
-    </div>
-
+<div class="container body-content" style="min-height: 100%; ">
+    @RenderBody()
+   
+        
+</div>
+<div style="margin-bottom: 10px;"><hr/></div>
+<footer class="text-center" style="position:fixed; width:100%; bottom: 0; height:50px;">
+    <p>&copy; @DateTime.Now.Year - Vehicle Rent Application</p>
+</footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")

@@ -97,11 +97,17 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "RentRequest", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" }) &nbsp;
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) &nbsp;
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" }) &nbsp;
-                    @Html.ActionLink("Replay", "Replay", "Notification", new { rentRqId = item.Id }, new { @class = "btn btn-info btn-sm" }) &nbsp;
-                    @Html.ActionLink("Assign", "Assign", "RentAssign", new { rentRqId = item.Id }, new { @class = "btn btn-success btn-sm" })
+                    @if (User.IsInRole("Customer")|| User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) <span> &nbsp;</span>
+                        @Html.ActionLink("Replay", "Replay", "Notification", new { rentRqId = item.Id }, new { @class = "btn btn-info btn-sm" })<span>&nbsp;</span>
+                    }
+                @if (User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
+                {
+                    @*@Html.ActionLink("Edit", "Edit", "RentRequest", new {id = item.Id}, new {@class = "btn btn-warning btn-sm"})<span>&nbsp;</span>
+                    @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger btn-sm"})<span>&nbsp;</span>*@
+                    @Html.ActionLink("Assign", "Assign", "RentAssign", new {rentRqId = item.Id}, new {@class = "btn btn-success btn-sm"})<span>&nbsp;</span>
+                }
                 </td>
             </tr>
         }

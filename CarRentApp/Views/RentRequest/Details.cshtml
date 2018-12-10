@@ -84,6 +84,10 @@
     </dl>
 </div>
 <p class="col-md-offset-1">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new {@class="btn btn-success"}) &nbsp;
+@if (User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
+{
+    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new {@class = "btn btn-success"})<span>&nbsp;</span>
+
+}
     @Html.ActionLink("Back to List", "Index",null,new{@class="btn btn-info "})
 </p>

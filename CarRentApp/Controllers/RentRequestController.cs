@@ -19,13 +19,31 @@ namespace CarRentApp.Controllers
     {
         private RentDbContext db = new RentDbContext();
 
+            
         // GET: /RentRequest/
         public ActionResult Index()
         {
-            var rentrequests = db.RentRequests.Include(r => r.Customer).Include(r => r.VehicleType).Where(c=>c.IsDelete==false).ToList();
-            List< RentRequestViewModel> rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
-
+            List<RentRequestViewModel> rentrequestViewModel = new List<RentRequestViewModel>();
+            if (User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
+            {
+                var rentrequests = db.RentRequests.Include(r => r.Customer).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
+                rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
+            }
+            if (User.IsInRole("Customer"))
+            {
+                var userId = User.Identity.GetUserId();
+                var user = db.Customers.FirstOrDefault(c => c.UserId == userId);
+                if (user!=null)
+                {
+                    var rentrequests = db.RentRequests.Include(r => r.Customer).Where(x=>x.Id==user.Id).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
+                    rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
+                }
+                
+            }
             return View(rentrequestViewModel);
+
+
+
         }
 
         // GET: /RentRequest/Details/5
@@ -77,7 +95,7 @@ namespace CarRentApp.Controllers
                 {
                     Notification notification=new Notification();
                     notification.Status = "New";
-                    notification.Details = "Get a new rent request ";
+                    notification.Details = "New rent request ";
                     notification.NotificatinDateTime=DateTime.Now;
                     notification.CustomerId = rentRequest.CustomerId;
                     notification.RentRequestId = rentRequest.Id;
@@ -86,7 +104,7 @@ namespace CarRentApp.Controllers
 
                     RentRequestHistory rentRequestHistory =new RentRequestHistory();
                     rentRequestHistory.Status = "New";
-                    rentRequestHistory.Text = "Get a new rent request";
+                    rentRequestHistory.Text = "New rent request";
                     rentRequestHistory.HistoryDateTime=DateTime.Now;
                     rentRequestHistory.RentRequestId = rentRequest.Id;
                     db.RentRequestHistorys.Add(rentRequestHistory);
