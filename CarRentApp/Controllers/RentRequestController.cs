@@ -35,7 +35,7 @@ namespace CarRentApp.Controllers
                 var user = db.Customers.FirstOrDefault(c => c.UserId == userId);
                 if (user!=null)
                 {
-                    var rentrequests = db.RentRequests.Include(r => r.Customer).Where(x=>x.Id==user.Id).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
+                    var rentrequests = db.RentRequests.Include(r => r.Customer).Where(x=>x.CustomerId==user.Id).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
                     rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
                 }
                 
