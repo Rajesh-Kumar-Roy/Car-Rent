@@ -26,7 +26,7 @@ namespace CarRentApp.Controllers
             List<RentRequestViewModel> rentrequestViewModel = new List<RentRequestViewModel>();
             if (User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
             {
-                var rentrequests = db.RentRequests.Include(r => r.Customer).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
+                var rentrequests = db.RentRequests.Include(c=>c.RentAssigns).Include(r => r.Customer).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
                 rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
             }
             if (User.IsInRole("Customer"))
@@ -35,7 +35,7 @@ namespace CarRentApp.Controllers
                 var user = db.Customers.FirstOrDefault(c => c.UserId == userId);
                 if (user!=null)
                 {
-                    var rentrequests = db.RentRequests.Include(r => r.Customer).Where(x=>x.CustomerId==user.Id).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
+                    var rentrequests = db.RentRequests.Include(c=>c.RentAssigns).Include(r => r.Customer).Where(x=>x.CustomerId==user.Id).Include(r => r.VehicleType).Where(c => c.IsDelete == false).ToList();
                     rentrequestViewModel = Mapper.Map<List<RentRequestViewModel>>(rentrequests);
                 }
                 
@@ -53,7 +53,8 @@ namespace CarRentApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RentRequest rentrequest = db.RentRequests.Include(c=>c.VehicleType).Include(c=>c.Customer).SingleOrDefault(d=>d.Id==id);
+
+            RentRequest rentrequest = db.RentRequests.Include(c=>c.VehicleType).Include(c=>c.Customer).Include(c=>c.RentAssigns).SingleOrDefault(d=>d.Id==id);
             if (rentrequest == null)
             {
                 return HttpNotFound();
@@ -65,8 +66,10 @@ namespace CarRentApp.Controllers
         // GET: /RentRequest/Create
         public ActionResult Create()
         {
+            
             //ViewBag.CustomerId = new SelectList(db.Customers, "Id", "Name");
             ViewBag.VehicleTypeId = new SelectList(db.VehicleTypes, "Id", "Name");
+                     
             return View();
         }
 

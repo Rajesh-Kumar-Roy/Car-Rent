@@ -86,7 +86,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AirCondition, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.AirCondition, new { @class = "form-control" })
+                @Html.TextBoxFor(model=>model.AirCondition, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AirCondition, null, new { @class = "text-danger" })
             </div>
         </div>
