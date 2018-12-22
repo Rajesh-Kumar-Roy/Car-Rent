@@ -180,6 +180,7 @@
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\RentAssignController.cs" />
     <Compile Include="Controllers\RentRequestController.cs" />
+    <Compile Include="Controllers\RentRequestHistoryController.cs" />
     <Compile Include="Controllers\VehicleTypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -757,6 +758,11 @@
     <Content Include="Views\RentAssign\Edit.cshtml" />
     <Content Include="Views\RentAssign\Index.cshtml" />
     <Content Include="Views\RentAssign\Assign.cshtml" />
+    <Content Include="Views\RentRequestHistory\Create.cshtml" />
+    <Content Include="Views\RentRequestHistory\Delete.cshtml" />
+    <Content Include="Views\RentRequestHistory\Details.cshtml" />
+    <Content Include="Views\RentRequestHistory\Edit.cshtml" />
+    <Content Include="Views\RentRequestHistory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

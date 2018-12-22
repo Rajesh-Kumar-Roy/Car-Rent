@@ -16,9 +16,11 @@ namespace CarRentApp.Models
         [Required]
         [StringLength(100)]
         public string Status { get; set; }
+        [Display(Name="History Date Time")]
         public DateTime HistoryDateTime { get; set; }
 
         [ForeignKey("RentRequest")]
+        
         public int RentRequestId { get; set; }
         public RentRequest RentRequest { get; set; }
 

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<CarRentApp.Models.RentRequestHistory>
+
+@{
+    ViewBag.Title = "Rent History";
+}
+<br />
+<h2>Rent History List </h2>
+
+@section styles
+{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" />
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" rel="stylesheet" />
+
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+}
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table id="example" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>
+            SL
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentRequest.FromPlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HistoryDateTime)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    </thead>
+    @{
+        var sl = 0;
+    }
+
+    @foreach (var item in Model)
+    {
+        sl++;
+        <tr>
+            <td>
+                @sl
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentRequest.FromPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HistoryDateTime)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new {id = item.Id})|*@ 
+                @Html.ActionLink("Details", "Details", new {id = item.Id},new{@class="btn btn-primary"}) <span>&nbsp;</span>
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id},new{@class="btn btn-primary"})
+            </td>
+        </tr>
+    }
+    <thead>
+        <tr>
+            <th>
+                SL
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RentRequest.FromPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HistoryDateTime)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+
+</table>
+
+@section scripts
+{
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+   
+}
