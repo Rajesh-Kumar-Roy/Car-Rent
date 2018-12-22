@@ -22,41 +22,42 @@
 
 <table id="example" class="table table-bordered table-hover">
     <thead>
-    <tr>
-        <th>
-            SL
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleTypeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FromPlace)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ToPlace)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AirCondition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleQty)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            Action
-        </th>
-    </tr>
+        <tr class="bg-info">
+            <th>
+                SL
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirCondition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VehicleQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            
+            <th>
+                Action
+            </th>
+        </tr>
     </thead>
     <tbody>
         @{
@@ -99,8 +100,8 @@
                 <td>
                     @if (User.IsInRole("Customer")|| User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
                     {
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) <span> &nbsp;</span>
-                        @Html.ActionLink("Replay", "Replay", "Notification", new { rentRqId = item.Id }, new { @class = "btn btn-info btn-sm" })<span>&nbsp;</span>
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default btn-sm" }) <span> &nbsp; &nbsp;</span>
+                        @Html.ActionLink("Replay", "Replay", "Notification", new { rentRqId = item.Id }, new { @class = "btn btn-info btn-sm" })<span>&nbsp; &nbsp;</span>
                     }
                 @if (User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
                 {
