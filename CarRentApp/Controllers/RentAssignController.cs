@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using AutoMapper;
 using CarRentApp.Models;
 using CarRentApp.Context;
 using CarRentApp.ViewModels;
+using Microsoft.Reporting.WebForms;
 
 namespace CarRentApp.Controllers
 {
@@ -168,12 +170,33 @@ namespace CarRentApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RentAssign rentassign = db.RentAssigns.Find(id);
-            db.RentAssigns.Remove(rentassign);
+            RentAssign rentAssign = db.RentAssigns.Find(id);
+            db.RentAssigns.Remove(rentAssign ?? throw new InvalidOperationException()); 
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult RentReport()
+        {
+            var rentReport = db.GetRentAssignedReport();
+            string reportPath = Request.MapPath(Request.ApplicationPath) +
+                                @"\Reports\RentAssigned\RentAssignedReportrdlc.rdlc";
+            var reportViewer = new ReportViewer()
+            {
+                KeepSessionAlive = true,
+                SizeToReportContent = true,
+                Width = Unit.Percentage(100),
+                ProcessingMode = ProcessingMode.Local
+            };
+
+            reportViewer.LocalReport.ReportPath = reportPath;
+            ReportDataSource rds=new ReportDataSource("DS_RentAssignedSummary",rentReport);
+            reportViewer.LocalReport.DataSources.Add(rds);
+            ViewBag.ReportViewer = reportViewer;
+
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

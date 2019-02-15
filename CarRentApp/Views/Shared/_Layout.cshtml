@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using CarRentApp.ProjectEnum
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,22 +28,22 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                    @if (User.IsInRole("Customer") || User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
+                    @if (User.IsInRole(RoleEnum.Customer.ToString()) || User.IsInRole(RoleEnum.AppAdmin.ToString()) || User.IsInRole(RoleEnum.Controller.ToString()))
                     {
                         <li>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Rent Request
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Create", "Create", "RentRequest")</li>
-                            <li>@Html.ActionLink("Rent Request List", "Index", "RentRequest")</li>
-                        </ul>
-                    </li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="#">
+                                Rent Request
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Create", "Create", "RentRequest")</li>
+                                <li>@Html.ActionLink("Rent Request List", "Index", "RentRequest")</li>
+                            </ul>
+                        </li>
                     }
-                    
-                    @if (User.IsInRole("AppAdmin") || User.IsInRole("Controller"))
-                        {
+
+                    @if (User.IsInRole(RoleEnum.AppAdmin.ToString()) || User.IsInRole(RoleEnum.Controller.ToString()))
+                    {
 
                         <li>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -55,43 +56,43 @@
                             </ul>
                         </li>
                         <li>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Vehicle Type
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Create", "Create", "VehicleType")</li>
-                            <li>@Html.ActionLink("Vehicle Type List", "Index", "VehicleType")</li>
-                            
-                        </ul>
-                    </li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Vehicle Type
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Create", "Create", "VehicleType")</li>
+                                <li>@Html.ActionLink("Vehicle Type List", "Index", "VehicleType")</li>
+
+                            </ul>
+                        </li>
 
 
-                            <li>@Html.ActionLink("Rent Assign List", "Index", "RentAssign")</li>
-                           <li>@Html.ActionLink("History","Index","RentRequestHistory")</li>
-                        }
-                    
+                        <li>@Html.ActionLink("Rent Assign List", "Index", "RentAssign")</li>
+                        <li>@Html.ActionLink("History", "Index", "RentRequestHistory")</li>
+                    }
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-<div class="container body-content" style="min-height: 100%; ">
-    @RenderBody()
-   
-        
-</div>
-<div style="margin-bottom: 10px;"><hr/></div>
-<footer class="text-center" style="position:fixed; width:100%; bottom: 0; height:50px;">
-    <p>&copy; @DateTime.Now.Year - Vehicle Rent Application</p>
-</footer>
+    <div class="container body-content" style="min-height: 100%; ">
+        @RenderBody()
+
+
+    </div>
+    <div style="margin-bottom: 10px;"><hr /></div>
+    <footer class="text-center" style="position:fixed; width:100%; bottom: 0; height:50px;">
+        <p>&copy; @DateTime.Now.Year - Vehicle Rent Application</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
 
     <script src="~/Scripts/jquery-2.1.3.min.js"></script>
-   
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,14 @@
+﻿@model CarRentApp.Views.Report.RentAssignedReportVm
+@{
+    ViewBag.Title = "RentReport";
+}
+
+<div class="form-horizontal">
+<br/>       
+<div class="form-group">
+    @if (ViewBag.ReportViewer != null)
+    {
+        Html.RenderPartial("Report/_LoadReport");
+    }
+</div>
+</div>

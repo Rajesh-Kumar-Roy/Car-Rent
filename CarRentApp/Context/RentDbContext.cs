@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using CarRentApp.Models;
+using CarRentApp.Views.Report;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CarRentApp.Context
@@ -22,6 +23,14 @@ namespace CarRentApp.Context
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<RentRequestHistory> RentRequestHistorys { get; set; }
         public DbSet<RentAssign> RentAssigns { get; set; }
+
+
+        public ICollection<RentAssignedReportVm> GetRentAssignedReport()
+        {
+            var result = Database.SqlQuery<RentAssignedReportVm>("SELECT * FROM SP_RentAssignDetails").ToList();
+            return result;
+
+        }
     }
 
     
